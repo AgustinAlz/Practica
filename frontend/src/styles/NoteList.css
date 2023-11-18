@@ -1,0 +1,58 @@
+.card{
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    /*width: 20%;*/
+    height: 300px;
+  }
+ 
+.card-note{
+    line-height: 20px;
+    margin: 0;
+}
+
+.card-author{
+    line-height: 20px;
+    margin: 0;
+}
+
+.bottom-card{
+  position: absolute;
+  bottom: 10px;
+}
+
+.border {
+  border: 2px indigo dashed;
+}
+
+.d-table {
+  display:table;
+}
+
+.d-table-cell {
+  display:table-cell;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.tar {
+  text-align: right;
+  padding-left: 0%;
+}
+
+.ant-space-item{
+    width: 300px;
+    /*width: 19%;*/
+}
+  
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  /* Add some padding inside the card container */
+.container {
+    padding: 2px 16px;
+  }
