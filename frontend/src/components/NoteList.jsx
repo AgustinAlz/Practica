@@ -1,4 +1,5 @@
 //import React, { Component } from 'react';
+
 import { useState, useEffect } from "react";
 import { LanguageContext } from "../context/LanguageContext";
 import { useContext } from "react";
@@ -22,7 +23,7 @@ async componentDidMount(){
 }*/
 
 function NoteList(){
-    const [notes, setNotes] = useSate([]);
+    const [notes, setNotes] = useState([]);
     const { language } = useContext(LanguageContext);
 
     useEffect(() => {
@@ -36,7 +37,7 @@ function NoteList(){
     return (
         <Space wrap>
             {
-                this.state.notes.map(note => (
+                notes.map(note => (
                     <Card className="card" 
                         title={note.title} 
                         key={note._id}
