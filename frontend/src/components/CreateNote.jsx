@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { useParams } from 'react-router-dom';
+import userService from '../services/user';
 import axios from 'axios';
 import { DatePicker, Space } from 'antd';
 
@@ -18,13 +19,13 @@ export default class CreateNote extends Component {
 
     async componentDidMount(){
         
-        const res = await axios.get('http://localhost:4000/api/users');
+        const res = await userService.getUsers();
         this.setState({
-            users: res.data.map(user => user.username),
-            userSelected: res.data[1].username,
+            users: res.map(user => user.username),
+            userSelected: res[1].username,
         });
         
-        console.log(res.data[0]._id);
+        console.log(res[0]._id);
         const foo= useParams();
         console.log(foo);
         //console.log(this.props.match.params);

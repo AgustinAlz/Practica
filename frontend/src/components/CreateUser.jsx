@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import userService from '../services/user';
 
 export default class CreateUser extends Component {
     state = {
@@ -12,13 +12,11 @@ export default class CreateUser extends Component {
     }
 
     getUsers = async () => {
-        const res = await axios.get('http://localhost:4000/api/users');
-        //console.log(res);
-        this.setState({users: res.data});        
+        const res = await userService.getUsers();
+        this.setState({users: res});        
     }
 
     onChangeUsername = (e) =>{
-        
         this.setState({
             username: e.target.value
         })
@@ -26,14 +24,14 @@ export default class CreateUser extends Component {
 
     onSubmit = async e => {
         e.preventDefault();
-        const res = await axios.post('http://localhost:4000/api/users', {
+        const res =await userService.createUser({
             username: this.state.username
-        })
+        });
         this.getUsers();        
     }
 
     deleteUser = async (id) => {
-        const rest = await axios.delete('http://localhost:4000/api/users/' + id);
+        await userService.deleteUserById(id);
         this.getUsers();
     }
 

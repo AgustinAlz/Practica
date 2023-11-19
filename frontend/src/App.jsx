@@ -1,25 +1,23 @@
-import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { LanguageContext } from "./context/LanguageContext";
+import { useMemo, useState } from "react";
+import Router from "./routes/index";
 import Navigation from './components/Navigation';
-import NoteList from './components/NoteList';
-import CreateNote from './components/CreateNote';
-import CreateUser from './components/CreateUser';
-import './App.css';
+import './styles/App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+	const [language, setLanguage] = useState("ES");
+	const languageProvider = useMemo(
+		() => ({ language, setLanguage }),
+		[language, setLanguage]
+	);
 
   return (
-    <Router>
+    <LanguageContext.Provider value={languageProvider}>
       <Navigation/>
-      <Routes>
-        <Route path="/" element={<NoteList />} />
-        <Route path="/edit/:id" element={<CreateNote />} />
-        <Route path="/create" element={<CreateNote />} />
-        <Route path="/user" element={<CreateUser/>} />
-      </Routes>
-    </Router>
-  )
+      <Router />
+    </LanguageContext.Provider>
+  )  
 }
 
 export default App

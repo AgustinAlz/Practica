@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { Space } from 'antd';
 
 export default class Navigation extends Component {
@@ -8,9 +7,9 @@ export default class Navigation extends Component {
             <div>
                   <nav>
 
-                    <Link to="/">
+                    <a href="/">
                         Notas
-                    </Link>
+                    </a>
                     <button type="button">
                     </button>
                 </nav>
@@ -18,13 +17,13 @@ export default class Navigation extends Component {
                     <Space direction="horizontal">
                         <ul>
                             <li>
-                                <Link to="/">Lista de Nota</Link>
+                                <a href="/">Lista de Nota</a>
                             </li>
                             <li>
-                                <Link to="/create">Crear Nota</Link>
+                                <a href="/create">Crear Nota</a>
                             </li>
                             <li>
-                                <Link to="/user">Crear Usuario</Link>
+                                <a href="/user">Crear Usuario</a>
                             </li>
                         </ul>
                     </Space>
