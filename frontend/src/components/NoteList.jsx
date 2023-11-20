@@ -27,13 +27,23 @@ function NoteList(){
     const { language } = useContext(LanguageContext);
 
     useEffect(() => {
-        async function fetchData () {
-            const response = await noteService.getNotes();
-            setNotes(response);
+        async function fetchData () { 
+            setNotes(await noteService.getNotes())
+            //const response = await noteService.getNotes();
+            //setNotes(response);
         }
         fetchData();
-    }, []);
+    }, [])
+    
+    const deleteNote = (async (id) => {
+        await noteService.deleteNoteById(id);
+        setNotes(oldNotes => {
+            return oldNotes.filter (note =>note._id !== id)
+        });
 
+        //const response = await noteService.getNotes();
+        //setNotes(response);
+    })
     return (
         <Space wrap>
             {
@@ -61,7 +71,7 @@ function NoteList(){
                                     
                                 </div>
                                 <div className="d-table-cell tar">
-                                    <Button icon={<DeleteOutlined />} onClick={ () => this.deleteNote(note._id)} >
+                                    <Button icon={<DeleteOutlined />} onClick={ () => deleteNote(note._id)} >
                                         Eliminar
                                     </Button>
                                 </div>
@@ -73,6 +83,8 @@ function NoteList(){
         </Space>
     )
 }
+
+
 
 export default NoteList;
 /*
