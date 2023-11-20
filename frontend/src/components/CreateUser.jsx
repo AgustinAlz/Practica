@@ -1,4 +1,3 @@
-//import React, { Component } from 'react'
 import { useState, useEffect } from "react";
 import { LanguageContext } from "../context/LanguageContext";
 import { useContext } from "react";
@@ -22,11 +21,9 @@ function CreateUser(){
 
     const onSubmit = async e => {
         e.preventDefault();
-        console.log(nombre)
         const res = await userService.createUser({
             username: nombre
         });
-        console.log(res);
         setUsers(await userService.getUsers());
     }
 
@@ -47,7 +44,6 @@ function CreateUser(){
                     Crear un nuevo usuario
                 </h3>
                 <form onSubmit={onSubmit}>
-                {/* onSubmit={onSubmit}> */}
                     <input 
                         type="text"
                         value={nombre}

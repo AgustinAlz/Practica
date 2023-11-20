@@ -35,6 +35,11 @@ function NoteList(){
         fetchData();
     }, [])
     
+    const editNote = async (id) => {
+        window.location.href = "/edit/" + id
+        console.log("Editar")
+    }
+
     const deleteNote = (async (id) => {
         await noteService.deleteNoteById(id);
         setNotes(oldNotes => {
@@ -63,7 +68,7 @@ function NoteList(){
                             <Divider className="divider-full" />
                             <div className="border d-table w-100">
                                 <div className="d-table-cell">
-                                    <Button type="primary" icon={<EditOutlined />} onClick={ () => this.editNote(note._id)}>
+                                    <Button type="primary" icon={<EditOutlined />} onClick={ () => editNote(note._id)}>
                                     
                                             Editar
                               

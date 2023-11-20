@@ -1,11 +1,133 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { LanguageContext } from "../context/LanguageContext";
+import { useContext } from "react";
 import { useParams } from 'react-router-dom';
 import userService from '../services/user';
-import axios from 'axios';
 import { DatePicker, Space } from 'antd';
+import noteService from "../services/note";
 
 
-export default class CreateNote extends Component {
+
+function CreateNote() {
+    const [users, setUsers] = useState([]);
+    const [note, setNote] = useState({
+        _id: "",
+        author: "",
+        title: "",
+        content: "",
+        date: new Date(),
+        editing: false
+    });
+
+    const { id } = useParams();
+    
+    useEffect(() => {
+        async function fetchData() {
+            const response = await userService.getUsers()
+            setUsers(response);
+            setNote({...note,
+                author: response[0].username});
+            const noteId = id;
+                       
+            if (noteId){
+                const res = await noteService.getNoteById(noteId);
+                setNote({
+                    _id: noteId,
+                    title: res.title,
+                    content: res.content,
+                    author: res.author,
+                    date: new Date(res.date),
+                    editing: true
+                });
+            }
+        }
+        fetchData();
+    }, []);
+
+
+    const onDateChange = (date, dateString) => {
+        setNote({
+            ...note,
+            date, date
+        });
+    };
+
+    const onSubmit = async e => {
+        e.preventDefault();
+        if(note.editing){
+            await noteService.updateNoteById(note._id, note);
+        } else {
+            await noteService.createNote(note);
+        }
+        window.location.href = '/';
+    };
+
+    function handleChange(e) {
+        const value = e.target.value;
+        setNote({
+            ...note,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    return (
+        <div>
+            <h4>Crear Nota</h4>
+            <form onSubmit={onSubmit}>
+                <div>
+                    <select
+                        name="author"
+                        onChange={handleChange}
+                        value={note.author}
+                    >
+                        {users.map((user) => {
+                            return (
+                                <option key={user._id} value={user.username}>
+                                    {user.username}
+                                </option>
+                            );
+                        })};
+                    </select>
+                </div>
+                <div>
+                    <input
+                        type="text"
+                        placeholder="Titulo"
+                        name="title"
+                        onChange={handleChange}
+                        value={note.title}
+                        required>
+
+                    </input>
+                </div>
+                <div>
+                    <textarea
+                        name="content"
+                        placeholder='Contenido'
+                        onChange={handleChange}
+                        value={note.content}
+                        required
+                    >
+                    </textarea>
+                </div>
+                <div>
+                    <DatePicker
+                        selecected={note.date}
+                        onChange={onDateChange}
+                    />
+                </div>
+                <button type="submit">
+                    Guardar
+                </button>
+            </form>
+        </div>
+    )
+}
+
+export default CreateNote;
+
+
+/*export default class CreateNote extends Component {
     
     state={
         users:[],
@@ -126,4 +248,4 @@ export default class CreateNote extends Component {
             </div>
         )
     }
-}
+}*/
