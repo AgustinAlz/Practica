@@ -28,7 +28,7 @@ function NoteList(){
 
     useEffect(() => {
         async function fetchData () { 
-            setNotes(await noteService.getNotes())
+            setNotes(await noteService.getNotes());
             //const response = await noteService.getNotes();
             //setNotes(response);
         }
@@ -83,8 +83,6 @@ function NoteList(){
         </Space>
     )
 }
-
-
 
 export default NoteList;
 /*
