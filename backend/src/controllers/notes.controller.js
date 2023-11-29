@@ -4,6 +4,8 @@ const notesController = {};
 // Importo el modelo de datos
 const Note = require('../models/Note');
 
+//tengo que ponerle try catch a los await de base de datos
+
 // Creo funcion Get de notes
 notesController.getNotes = async (req, res) => {
     //Busco notas

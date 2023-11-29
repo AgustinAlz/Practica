@@ -68,11 +68,8 @@ function NoteList(){
                             <div className="border d-table w-100">
                                 <div className="d-table-cell">
                                     <Button type="primary" icon={<EditOutlined />} onClick={ () => editNote(note._id)}>
-                                    
                                             Editar
-                              
                                     </Button>
-                                    
                                 </div>
                                 <div className="d-table-cell tar">
                                     <Button icon={<DeleteOutlined />} onClick={ () => deleteNote(note._id)} >

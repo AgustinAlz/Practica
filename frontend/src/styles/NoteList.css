@@ -18,12 +18,11 @@
 
 .bottom-card{
   position: absolute;
+  width: 250px;
   bottom: 10px;
 }
 
-.border {
-  border: 2px indigo dashed;
-}
+
 
 .d-table {
   display:table;
@@ -43,6 +42,7 @@
 }
 
 .ant-space-item{
+    /*width: 300px;*/
     width: 300px;
     /*width: 19%;*/
 }

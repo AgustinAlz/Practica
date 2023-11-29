@@ -1,20 +1,26 @@
-import { useState, useEffect, useContext } from "react";
+import { useState } from "react";
 import { Space, Menu } from 'antd';
 import { FileTextOutlined, FileAddOutlined, UserAddOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Navigation() {
+    const navigate = useNavigate();
+
+    const createUser = () => {
+        navigate("/user")
+    }
     const menuOptions = [
         {
             label: "Lista de Nota",
-            key: "mail",
+            key: "listNote",
             icon: <FileTextOutlined />
         },
         {
             label: "Crear Nota",
             key: "createNote",
             icon: <FileAddOutlined />
-        }, 
+        },
         {
             label: "Crear Usuario",
             key: "createUser",
@@ -22,60 +28,28 @@ function Navigation() {
         }];
 
     const [current, setCurrent] = useState('mail');
+
     const onClick = (e) => {
-        console.log('click ', e);
         setCurrent(e.key);
+        switch (e.key) {
+            case "listNote":
+                navigate("/");
+                break;
+            case "createNote":
+                navigate("/create");
+                break;
+            case "createUser":
+                navigate("/user");
+                break;
+        }
+
     };
 
     return (
         <div>
             <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={menuOptions} />
-           <Link></Link>
-            <ul>
-                        <li>
-                        <Link to="/">Lista de Nota</Link>
-                        </li>
-                        <li>
-                            <a href="/create">Crear Nota</a>
-                        </li>
-                        <li>
-                            <a href="/user">Crear Usuario</a>
-                        </li>
-                    </ul>
+     
         </div>
     )
 }
 export default Navigation;
-/*
-export default class Navigation extends Component {
-    render() {
-        return (
-            <div>
-                  <nav>
-
-                    <a href="/">
-                        Notas
-                    </a>
-                    <button type="button">
-                    </button>
-                </nav>
-                <div>
-                    <Space direction="horizontal">
-                        <ul>
-                            <li>
-                                <a href="/">Lista de Nota</a>
-                            </li>
-                            <li>
-                                <a href="/create">Crear Nota</a>
-                            </li>
-                            <li>
-                                <a href="/user">Crear Usuario</a>
-                            </li>
-                        </ul>
-                    </Space>
-                </div>
-            </div>
-        )
-    }
-}
-*/

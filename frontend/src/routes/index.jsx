@@ -1,5 +1,5 @@
 import "../styles/App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import CreateNote from "../components/CreateNote";
 import CreateUser from "../components/CreateUser";
 import Navigation from "../components/Navigation";
@@ -8,7 +8,7 @@ import NoteList from "../components/NoteList";
 
 
 function Router() {
-	const router = createBrowserRouter([
+	/*const router = createBrowserRouter([
 		{
 			path: "/",
 			element: <NoteList />
@@ -27,7 +27,15 @@ function Router() {
 		}
 	]);
 
-	return <RouterProvider router={router} />;
+	return <RouterProvider router={router} />;*/
+
+	/*	const router = [{
+		<Route path= "/" element: {<NoteList />} />},
+		{<Route path: "/create" element: {<CreateNote />} />},
+		{<Route path: "/edit/:id" element: {<CreateNote />} />},
+		{<Route path: "/user" element: {<CreateUser />} />},
+	];
+
 	//Provar para incluir navigation
 	/*return (
 		<div>
@@ -35,7 +43,7 @@ function Router() {
 			<RouterProvider router={router} />;
 		</div>
 	)*/
-	
+
 }
 
 export default Router;
