@@ -1,4 +1,4 @@
-
+//import User from "../models/User.js";
 // creo objeto controller
 const usersController = {};
 
@@ -6,7 +6,7 @@ const usersController = {};
 const User = require('../models/User');
 
 // Creo funcion Get de notes
-usersController.getUsers = async (req, res) => {
+const getUsers = async (req, res) => {
     try{
     //Busco usuarios
     const users = await User.find();
@@ -19,7 +19,7 @@ usersController.getUsers = async (req, res) => {
 }
 
 // Creo funcion Create de User
-usersController.createUser = async (req, res) => {
+const createUser = async (req, res) => {
     //obtengo del body del request los datos
     const { username } = req.body
     //Genero objeto con los datos del req.body
@@ -36,7 +36,7 @@ usersController.createUser = async (req, res) => {
 };
 
 // Creo funcion Get de un User
-usersController.getUser = async (req, res) => {
+const getUser = async (req, res) => {
     try{
     const user = await User.findById(req.params.id);
     if(!user){
@@ -49,7 +49,7 @@ usersController.getUser = async (req, res) => {
 };
 
 // Creo funcion Update de User
-usersController.updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
     try{
     const { username } = req.body
         
@@ -61,7 +61,7 @@ usersController.updateUser = async (req, res) => {
 };
 
 // Creo funcion delete User
-usersController.deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
     try{
     await User.findByIdAndDelete(req.params.id);
     res.json({message: `El usuario ${req.params.id} ha sido eliminada`})
@@ -71,4 +71,11 @@ usersController.deleteUser = async (req, res) => {
 };
 
 // Exporto el modulo
-module.exports = usersController;
+//module.exports = usersController;
+module.exports = {
+    getUsers,
+    getUser,
+    createUser,
+    updateUser,
+    deleteUser
+}

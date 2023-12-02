@@ -1,3 +1,5 @@
+//import Note from "../models/Note.js";
+
 // creo objeto controller
 const notesController = {};
 
@@ -7,7 +9,7 @@ const Note = require('../models/Note');
 //tengo que ponerle try catch a los await de base de datos
 
 // Creo funcion Get de notes
-notesController.getNotes = async (req, res) => {
+const getNotes = async (req, res) => {
     //Busco notas
     const notes = await Note.find();
     //devulevo notas en un json
@@ -15,7 +17,7 @@ notesController.getNotes = async (req, res) => {
 }
 
 // Creo funcion Create de notes
-notesController.createNote = async (req, res) => {
+const createNote = async (req, res) => {
     //obtengo del body del request los datos
     const { title, content, date, author } = req.body
     //Genero objeto con los datos del req.body
@@ -32,13 +34,13 @@ notesController.createNote = async (req, res) => {
 };
 
 // Creo funcion Get de una note
-notesController.getNote = async (req, res) => {
+const getNote = async (req, res) => {
     const note = await Note.findById(req.params.id);
     res.json(note);
 };
 
 // Creo funcion Update de notes
-notesController.updateNote = async (req, res) => {
+const updateNote = async (req, res) => {
         const { title, content, date, author } = req.body
         
     await Note.findByIdAndUpdate(req.params.id, {
@@ -51,10 +53,17 @@ notesController.updateNote = async (req, res) => {
 };
 
 // Creo funcion delete notes
-notesController.deleteNote = async (req, res) => {
+const deleteNote = async (req, res) => {
     await Note.findByIdAndDelete(req.params.id);
     res.json({message: `Nota ${req.params.id} ha sido eliminada`})
 };
 
 // Exporto el modulo
-module.exports = notesController;
+//module.exports = notesController;
+module.exports = {
+    getNotes,
+    getNote,
+    createNote,
+    updateNote,
+    deleteNote
+}

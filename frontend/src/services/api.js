@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiBaseUrl, apiTimeout } from "../constants";
+import { apiBaseUrl, apiTimeout, apiBaseUrlDocker, apiBaseUrlProd } from "../constants";
 import { Navigate } from "react-router-dom";
 
 function errorMessage(err) {
@@ -19,11 +19,13 @@ function errorMessage(err) {
 }
 
 const api = axios.create({
-	baseURL: apiBaseUrl,
+	baseURL: apiBaseUrlProd,
 	timeout: apiTimeout,
 	headers: {
-		Accept: "application/json",
+		"Accept": "application/json",
 		"Content-Type": "application/json",
+		"Cache-Control": "no-cache",
+		//withCredentials: true,
 	},
 });
 

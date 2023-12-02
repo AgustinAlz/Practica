@@ -1,48 +1,36 @@
-//import React, { Component } from 'react';
-
 import { useState, useEffect } from "react";
 import { LanguageContext } from "../context/LanguageContext";
 import { useContext } from "react";
 import noteService from "../services/note";
-
-import { Card, Space } from 'antd';
-
+import { useNavigate } from "react-router-dom";
+import { Card, Space, Button, Divider } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, Divider} from 'antd';
 import '../styles/NoteList.css';
 
 
 
-/*export default class NoteList extends Component {
-state = {
-    notes: []
-}
-
-async componentDidMount(){
-    this.getNotes();
-}*/
-
-function NoteList(){
+function NoteList() {
+    const navigate = useNavigate();
     const [notes, setNotes] = useState([]);
     const { language } = useContext(LanguageContext);
 
     useEffect(() => {
-        async function fetchData () { 
+        async function fetchData() {
             setNotes(await noteService.getNotes());
             //const response = await noteService.getNotes();
             //setNotes(response);
         }
         fetchData();
     }, [])
-    
+
     const editNote = async (id) => {
-        window.location.href = "/edit/" + id
+        navigate("/edit/" + id);
     }
 
     const deleteNote = (async (id) => {
         await noteService.deleteNoteById(id);
         setNotes(oldNotes => {
-            return oldNotes.filter (note =>note._id !== id)
+            return oldNotes.filter(note => note._id !== id)
         });
 
         //const response = await noteService.getNotes();
@@ -52,8 +40,8 @@ function NoteList(){
         <Space wrap>
             {
                 notes.map(note => (
-                    <Card className="card" 
-                        title={note.title} 
+                    <Card className="card"
+                        title={note.title}
                         key={note._id}
                         extra={new Date(note.date).toLocaleDateString()}
                     >
@@ -67,12 +55,12 @@ function NoteList(){
                             <Divider className="divider-full" />
                             <div className="border d-table w-100">
                                 <div className="d-table-cell">
-                                    <Button type="primary" icon={<EditOutlined />} onClick={ () => editNote(note._id)}>
-                                            Editar
+                                    <Button type="primary" icon={<EditOutlined />} onClick={() => editNote(note._id)}>
+                                        Editar
                                     </Button>
                                 </div>
                                 <div className="d-table-cell tar">
-                                    <Button icon={<DeleteOutlined />} onClick={ () => deleteNote(note._id)} >
+                                    <Button icon={<DeleteOutlined />} onClick={() => deleteNote(note._id)} >
                                         Eliminar
                                     </Button>
                                 </div>
