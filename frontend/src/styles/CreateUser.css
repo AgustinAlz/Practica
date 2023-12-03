@@ -1,0 +1,15 @@
+.create-user-form {
+    width: 401px;
+}
+
+.user-name-input {
+    width: 301px;
+}
+
+.user-name-submit-button {
+    margin-left: 18px;
+}
+
+.delete-user-button {
+    float: right;
+}

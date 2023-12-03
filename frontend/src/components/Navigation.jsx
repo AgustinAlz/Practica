@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Space, Menu } from 'antd';
 import { FileTextOutlined, FileAddOutlined, UserAddOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 
 function Navigation() {
+    const [current, setCurrent] = useState('listNote');
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        console.log(location);
+        if (location) {
+            if(location.pathname.startsWith("/edit")){
+                setCurrent("/create");
+            }
+            else if( current !== location.pathname ) {
+                setCurrent(location.pathname);
+            }
+        }
+    }, [location, current]);
 
     const createUser = () => {
         navigate("/user")
@@ -13,42 +27,38 @@ function Navigation() {
     const menuOptions = [
         {
             label: "Lista de Nota",
-            key: "listNote",
+            key: "/",
             icon: <FileTextOutlined />
         },
         {
             label: "Crear Nota",
-            key: "createNote",
+            key: "/create",
             icon: <FileAddOutlined />
         },
         {
             label: "Crear Usuario",
-            key: "createUser",
+            key: "/user",
             icon: <UserAddOutlined />
         }];
-
-    const [current, setCurrent] = useState('mail');
 
     const onClick = (e) => {
         setCurrent(e.key);
         switch (e.key) {
-            case "listNote":
+            case "/":
                 navigate("/");
                 break;
-            case "createNote":
+            case "/create":
                 navigate("/create");
                 break;
-            case "createUser":
+            case "/user":
                 navigate("/user");
                 break;
         }
-
     };
 
     return (
         <div>
             <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={menuOptions} />
-     
         </div>
     )
 }

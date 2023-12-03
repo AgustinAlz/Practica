@@ -1,11 +1,12 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { DatePicker, Space, Form, Select, Button, Input, Typography } from 'antd';
 import { LanguageContext } from "../context/LanguageContext";
 import noteService from "../services/note";
 import userService from "../services/user";
-import "../styles/CreateNote.css"
+import "../styles/CreateNote.css";
+import navigation from './Navigation';
 
 
 function CreateNote() {
@@ -22,7 +23,8 @@ function CreateNote() {
     const dateFormat = 'DD/MM/YYYY';
     const { id } = useParams();
     const [form] = Form.useForm();
-
+    const navigate = useNavigate();
+    
     useEffect(() => {
         async function fetchData() {
             const response = await userService.getUsers()
@@ -61,9 +63,13 @@ function CreateNote() {
         } else {
             await noteService.createNote(note);
         }
-        window.location.href = '/';
+        navigate("/")
     };
 
+    const cancel = async e => {
+        //navigation.setCurrent('listNote');
+        navigate("/");
+    };
 
     const selectUser = (e) => {
         setNote({
@@ -80,7 +86,7 @@ function CreateNote() {
     };
 
     return (
-        <div>
+        <div className="create-note-form">
             <Title>Crear Nota</Title>
             <Space className="crud">
                 <Form form={form} onFinish={onSubmit}>
@@ -130,6 +136,9 @@ function CreateNote() {
                     <Form.Item>
                         <Button type="primary" htmlType="submit">
                             Guardar
+                        </Button>
+                        <Button className="cancel-button" onClick={() => cancel()}>
+                            Cancelar
                         </Button>
                     </Form.Item>
                 </Form>

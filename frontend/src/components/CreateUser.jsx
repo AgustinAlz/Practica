@@ -37,28 +37,26 @@ function CreateUser() {
 
         //const response = await userService.getUsers();
         //setUsers(response);
+        //        <Space align="start"className="FirstHalf" size="middle">
+        //<Space direction="vertical" size="small">
     });
 
     return (
-        <Space align="start"className="FirstHalf" size="middle">
-            <Space direction="vertical" size="small">
+        <div className="create-user-form">
             <Title>
                 Crear un nuevo usuario
             </Title>
             <Form onFinish={onSubmit}>
                 <Form.Item>
-
                     <Input
                         type="text"
                         value={nombre}
                         onChange={onChangeUsername}
+                        className="user-name-input"
                     />
-                </Form.Item>
-                <Form.Item>
-                    <Button type="primary" htmlType="submit">Guardar</Button>
+                    <Button className="user-name-submit-button" type="primary" htmlType="submit">Guardar</Button>
                 </Form.Item>
             </Form>
-            </Space>
             <List
                 header={<Text strong>Usuarios</Text>}
                 bordered
@@ -67,12 +65,12 @@ function CreateUser() {
                     users.map(user => (
                         <List.Item key={user.username}>
                             {user.username}
-                            <button onClick={() => deleteUser(user._id)}>Eliminar</button>
+                            <Button className="delete-user-button" onClick={() => deleteUser(user._id)}>Eliminar</Button>
                         </List.Item>)
                     )
                 }
             </List>
-        </Space >
+        </div>
     )
 }
 
