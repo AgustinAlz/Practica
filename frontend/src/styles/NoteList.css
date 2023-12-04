@@ -22,8 +22,6 @@
   bottom: 10px;
 }
 
-
-
 .d-table {
   display:table;
 }
@@ -42,9 +40,7 @@
 }
 
 .ant-space-item{
-    /*width: 300px;*/
     width: 300px;
-    /*width: 19%;*/
 }
   
 /* On mouse-over, add a deeper shadow */

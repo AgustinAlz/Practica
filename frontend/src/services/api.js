@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiBaseUrl, apiTimeout, apiBaseUrlDocker, apiBaseUrlProd } from "../constants";
+import { apiBaseUrlDev, apiTimeout, apiBaseUrlProd } from "../constants";
 import { Navigate } from "react-router-dom";
 
 function errorMessage(err) {
@@ -12,14 +12,15 @@ function errorMessage(err) {
 	// if (err.response && err.response.status === 404) {
 	// 	<Navigate to="/404" replace={true} />;
 	// }
-	// if (err.response && err.response.status === 500) {
+	//if (err.response && err.response.status === 500) {
 	// 	<Navigate to="/500" replace={true} />;
 	// }
-	return err;
+	//return err;
 }
 
 const api = axios.create({
-	baseURL: apiBaseUrl,
+	baseURL: apiBaseUrlProd,
+	//baseURL: apiBaseUrlDev,
 	timeout: apiTimeout,
 	headers: {
 		"Accept": "application/json",

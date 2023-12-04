@@ -2,12 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { DatePicker, Space, Form, Select, Button, Input, Typography } from 'antd';
-import { LanguageContext } from "../context/LanguageContext";
 import noteService from "../services/note";
 import userService from "../services/user";
 import "../styles/CreateNote.css";
-import navigation from './Navigation';
-
 
 function CreateNote() {
     const [users, setUsers] = useState([]);
@@ -67,7 +64,6 @@ function CreateNote() {
     };
 
     const cancel = async e => {
-        //navigation.setCurrent('listNote');
         navigate("/");
     };
 

@@ -1,7 +1,6 @@
 import { LanguageContext } from "./context/LanguageContext";
 import { useMemo, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Router from "./routes/index";
 import Navigation from './components/Navigation';
 import CreateNote from "./components/CreateNote";
 import CreateUser from "./components/CreateUser";

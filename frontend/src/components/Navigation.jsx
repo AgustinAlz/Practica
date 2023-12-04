@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Space, Menu } from 'antd';
 import { FileTextOutlined, FileAddOutlined, UserAddOutlined } from '@ant-design/icons';
-import { Link } from "react-router-dom";
 import { useNavigate,useLocation } from "react-router-dom";
 
 function Navigation() {
@@ -10,7 +9,6 @@ function Navigation() {
     const location = useLocation();
 
     useEffect(() => {
-        console.log(location);
         if (location) {
             if(location.pathname.startsWith("/edit")){
                 setCurrent("/create");

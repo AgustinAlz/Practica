@@ -7,8 +7,6 @@ import { Card, Space, Button, Divider } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import '../styles/NoteList.css';
 
-
-
 function NoteList() {
     const navigate = useNavigate();
     const [notes, setNotes] = useState([]);
