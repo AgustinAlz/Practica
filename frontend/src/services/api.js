@@ -19,8 +19,8 @@ function errorMessage(err) {
 }
 
 const api = axios.create({
-	//baseURL: apiBaseUrlProd,
-	baseURL: apiBaseUrlDev,
+	baseURL: apiBaseUrlProd,
+	//baseURL: apiBaseUrlDev,
 	timeout: apiTimeout,
 	headers: {
 		"Accept": "application/json",
