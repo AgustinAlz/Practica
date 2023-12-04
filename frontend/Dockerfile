@@ -17,7 +17,7 @@ COPY . .
 # RUN npm run build
 
 # Expón el puerto en el que se ejecutará tu aplicación Vite.js:
-EXPOSE 5173
+EXPOSE 3000
 
 # ENV PROXY_API=$PROXY_API
 
